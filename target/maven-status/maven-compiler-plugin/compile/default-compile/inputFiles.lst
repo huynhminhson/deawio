@@ -1,0 +1,15 @@
+/code/projects/deawio/src/main/java/deawio/model/DealModel.java
+/code/projects/deawio/src/main/java/deawio/model/ProductModel.java
+/code/projects/deawio/src/main/java/deawio/mapper/StoreModelMapper.java
+/code/projects/deawio/src/main/java/deawio/model/DealModelExample.java
+/code/projects/deawio/src/main/java/deawio/crawler/HtmlCrawler.java
+/code/projects/deawio/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java
+/code/projects/deawio/src/main/java/deawio/util/MyBatisUtil.java
+/code/projects/deawio/src/main/java/deawio/mapper/ProductModelMapper.java
+/code/projects/deawio/src/main/java/deawio/mapper/DealModelMapper.java
+/code/projects/deawio/src/main/java/deawio/model/ProductModelExample.java
+/code/projects/deawio/src/main/java/deawio/mapper/MainMapper.java
+/code/projects/deawio/src/main/java/deawio/model/StoreModelExample.java
+/code/projects/deawio/src/main/java/deawio/model/StoreModel.java
+/code/projects/deawio/src/main/java/deawio/crawler/BaseCrawler.java
+/code/projects/deawio/src/main/java/deawio/Main.java

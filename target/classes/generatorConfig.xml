@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="/home/osboxes/.m2/repository/org/postgresql/postgresql/42.1.4/postgresql-42.1.4.jar"/>
+  <context id="postgresql">
+    <jdbcConnection driverClass="org.postgresql.Driver"
+                    connectionURL="jdbc:postgresql://localhost:5432/deawio"
+                    userId="postgres"
+                    password="tygh">
+    </jdbcConnection>
+    <javaModelGenerator targetPackage="deawio.model"
+                        targetProject="/code/projects/deawio/src/main/java">
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="mapper"
+                     targetProject="/code/projects/deawio/src/main/resources">
+    </sqlMapGenerator>
+    <javaClientGenerator targetPackage="deawio.mapper"
+                         targetProject="/code/projects/deawio/src/main/java"
+                         type="XMLMAPPER">
+    </javaClientGenerator>
+    <table tableName="store" domainObjectName="StoreModel"></table>
+    <table tableName="product" domainObjectName="ProductModel"></table>
+    <table tableName="deal" domainObjectName="DealModel"></table>
+  </context>
+</generatorConfiguration>

@@ -1,13 +1,14 @@
 package deawio;
 
 import deawio.crawler.site.StoreSteampoweredCom;
-import deawio.util.AppConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
   public static void main(String[] args) throws InterruptedException {
-    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+    ApplicationContext applicationContext =
+        new ClassPathXmlApplicationContext("applicationContext.xml");
     while (true) {
       Thread t1 =
           new Thread((StoreSteampoweredCom) applicationContext.getBean("storeSteampoweredCom"));

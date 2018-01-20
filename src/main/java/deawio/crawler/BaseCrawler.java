@@ -19,10 +19,14 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BaseCrawler {
+  @Autowired public ApplicationContext applicationContext;
+
   public static double extractPrice(String priceString) {
     if (priceString.toLowerCase().contains("free")) {
       return 0;
@@ -86,7 +90,8 @@ public class BaseCrawler {
     SqlSession session = MyBatisUtil.sqlSessionFactory.openSession(true);
 
     // INSERT OR UPDATE NEW STORE
-    StoreModelExample storeModelExample = new StoreModelExample();
+    StoreModelExample storeModelExample =
+        (StoreModelExample) applicationContext.getBean("storeModelExample");
     storeModelExample.or().andNameEqualTo(htmlCrawler.storeName());
 
     List<StoreModel> storeModels =

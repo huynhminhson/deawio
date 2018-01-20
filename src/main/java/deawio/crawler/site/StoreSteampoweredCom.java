@@ -4,12 +4,20 @@ import deawio.crawler.BaseCrawler;
 import deawio.crawler.HtmlCrawler;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
-public class StoreSteampoweredCom extends BaseCrawler implements HtmlCrawler, Runnable {
+@Component
+public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
+  @Autowired public ApplicationContext applicationContext;
+  @Autowired public BaseCrawler baseCrawler;
+
   public String storeName() {
     return "Steam";
   }
@@ -22,9 +30,9 @@ public class StoreSteampoweredCom extends BaseCrawler implements HtmlCrawler, Ru
     return Arrays.asList("http://store.steampowered.com/search/?tags=-1&category1=998");
   }
 
-  public List<String> paginationUrls(Element container, String baseUrl) {
+  public List<String> paginationUrls(String html, String baseUrl) {
     List<String> result = new ArrayList<>();
-    Elements elements = container.select("div.pagination a");
+    Elements elements = Jsoup.parse(html).select("div.pagination a");
     for (Element e : elements) {
       if (e.attr("href") != null) {
         result.add(e.attr("href"));
@@ -54,14 +62,14 @@ public class StoreSteampoweredCom extends BaseCrawler implements HtmlCrawler, Ru
     if (check == null) {
       String priceString =
           container.select("div.col.search_price.responsive_secondrow").first().text();
-      return extractPrice(priceString);
+      return baseCrawler.extractPrice(priceString);
     } else {
       String priceString =
           container
               .select("div.col.search_price.discounted.responsive_secondrow strike")
               .first()
               .text();
-      return extractPrice(priceString);
+      return baseCrawler.extractPrice(priceString);
     }
   }
 
@@ -70,11 +78,11 @@ public class StoreSteampoweredCom extends BaseCrawler implements HtmlCrawler, Ru
     if (check == null) {
       String priceString =
           container.select("div.col.search_price.responsive_secondrow").first().text();
-      return extractPrice(priceString);
+      return baseCrawler.extractPrice(priceString);
     } else {
       String priceString =
           container.select("div.col.search_price.discounted.responsive_secondrow").first().text();
-      return extractPrice(priceString);
+      return baseCrawler.extractPrice(priceString);
     }
   }
 
@@ -82,5 +90,11 @@ public class StoreSteampoweredCom extends BaseCrawler implements HtmlCrawler, Ru
     return null;
   }
 
-  public void run() {}
+  public void run() {
+    StoreSteampoweredCom storeSteampoweredCom =
+        (StoreSteampoweredCom) applicationContext.getBean("storeSteampoweredCom");
+    for (String url : storeSteampoweredCom.startUrls()) {
+      baseCrawler.crawlHtml(storeSteampoweredCom, url, new HashSet<>());
+    }
+  }
 }

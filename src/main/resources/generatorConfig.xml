@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-  <classPathEntry location="/home/osboxes/.m2/repository/org/postgresql/postgresql/42.1.4/postgresql-42.1.4.jar"/>
+  <classPathEntry location="/home/hms/.m2/repository/org/postgresql/postgresql/42.1.4/postgresql-42.1.4.jar"/>
   <context id="postgresql">
     <jdbcConnection driverClass="org.postgresql.Driver"
                     connectionURL="jdbc:postgresql://localhost:5432/deawio"

@@ -20,6 +20,7 @@ deawio/crawler/HtmlCrawler.class
 deawio/model/StoreModelExample$Criterion.class
 deawio/model/ProductModelExample$Criterion.class
 deawio/util/MyBatisUtil.class
+deawio/extracter/SimpleExtracter.class
 deawio/model/StoreModelExample$GeneratedCriteria.class
 deawio/mapper/StoreModelMapper.class
 deawio/model/DealModel.class

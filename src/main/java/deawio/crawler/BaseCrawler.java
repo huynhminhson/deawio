@@ -19,17 +19,13 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BaseCrawler {
-  @Autowired public ApplicationContext applicationContext;
-
-  public static double extractPrice(String priceString) {
+  public Double extractPrice(String priceString) {
     if (priceString.toLowerCase().contains("free")) {
-      return 0;
+      return (double) 0;
     } else {
       for (char ch : priceString.toCharArray()) {
         if (ch == '.' || ch == ',' || Character.isDigit(ch)) {
@@ -37,29 +33,37 @@ public class BaseCrawler {
           priceString = priceString.replace(Character.toString(ch), "");
         }
       }
-      if (priceString.indexOf(",") < priceString.indexOf(".")) {
-        priceString = priceString.replace(",", "");
+      if (priceString.length() > 0) {
+        if (priceString.indexOf(",") < priceString.indexOf(".")) {
+          priceString = priceString.replace(",", "");
+        } else {
+          priceString = priceString.replace(".", "");
+          priceString = priceString.replace(",", ".");
+        }
+        return Double.valueOf(priceString);
       } else {
-        priceString = priceString.replace(".", "");
-        priceString = priceString.replace(",", ".");
+        return null;
       }
-      return Double.valueOf(priceString);
     }
   }
 
-  public static double extractDiscount(String discountString) {
+  public Double extractDiscount(String discountString) {
     for (char ch : discountString.toCharArray()) {
       if (ch == '.' || ch == ',' || Character.isDigit(ch)) {
       } else {
         discountString = discountString.replace(Character.toString(ch), "");
       }
     }
-    return Double.valueOf(discountString) / 100;
+    if (discountString.equals("")) {
+      return null;
+    } else {
+      return Double.valueOf(discountString) / 100;
+    }
   }
 
-  public static double calcDiscount(double low, double high) {
+  public Double calcDiscount(double low, double high) {
     if (low > high) {
-      throw new IllegalArgumentException();
+      return null;
     } else {
       if (high == 0) {
         return (double) 1;
@@ -69,19 +73,19 @@ public class BaseCrawler {
     }
   }
 
-  public static double calcHighPrice(double discount, double low) {
+  public Double calcHighPrice(double discount, double low) {
     if (discount == 1) {
       if (low == 0) {
-        return 0;
+        return 0d;
       } else {
-        throw new IllegalArgumentException();
+        return null;
       }
     } else {
       return low / (1 - discount);
     }
   }
 
-  public static double calcLowPrice(double discount, double high) {
+  public double calcLowPrice(double discount, double high) {
     return (1 - discount) * high;
   }
 
@@ -90,8 +94,7 @@ public class BaseCrawler {
     SqlSession session = MyBatisUtil.sqlSessionFactory.openSession(true);
 
     // INSERT OR UPDATE NEW STORE
-    StoreModelExample storeModelExample =
-        (StoreModelExample) applicationContext.getBean("storeModelExample");
+    StoreModelExample storeModelExample = new StoreModelExample();
     storeModelExample.or().andNameEqualTo(htmlCrawler.storeName());
 
     List<StoreModel> storeModels =
@@ -183,19 +186,19 @@ public class BaseCrawler {
         productId = productModels.get(0).getProductId();
       }
 
-      String dealUrl = htmlCrawler.dealUrl(container);
+      String dealUrl = htmlCrawler.dealUrl(container, url);
       Double dealLowPrice = htmlCrawler.dealLowPrice(container);
       Double dealHighPrice = htmlCrawler.dealHighPrice(container);
       Double dealDiscount = htmlCrawler.dealDiscount(container);
 
       if (dealLowPrice != null) {
         if (dealHighPrice != null) {
-          dealDiscount = BaseCrawler.calcDiscount(dealLowPrice, dealHighPrice);
+          dealDiscount = calcDiscount(dealLowPrice, dealHighPrice);
         } else {
-          dealHighPrice = BaseCrawler.calcHighPrice(dealDiscount, dealLowPrice);
+          dealHighPrice = calcHighPrice(dealDiscount, dealLowPrice);
         }
       } else {
-        dealLowPrice = BaseCrawler.calcLowPrice(dealDiscount, dealHighPrice);
+        dealLowPrice = calcLowPrice(dealDiscount, dealHighPrice);
       }
 
       // INSERT OR UPDATE DEAL

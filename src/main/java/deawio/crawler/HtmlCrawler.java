@@ -20,7 +20,7 @@ public interface HtmlCrawler {
 
   public String productImageUrl(Element container, String baseUrl);
 
-  public String dealUrl(Element container);
+  public String dealUrl(Element container, String baseUrl);
 
   public Double dealHighPrice(Element container);
 

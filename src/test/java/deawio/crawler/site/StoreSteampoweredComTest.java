@@ -17,9 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfig.class})
 public class StoreSteampoweredComTest extends TestCase {
-  private static String baseUrl = "http://store.steampowered.com/search/?tags=-1&category1=998";
-
   @Autowired private StoreSteampoweredCom storeSteampoweredCom;
+  private static String baseUrl = "http://store.steampowered.com/search/?tags=-1&category1=998";
 
   @Test
   public void testPaginationUrls() throws IOException {

@@ -3,27 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="9abc078c-f5d8-48ef-9aa9-112a4c516d14" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/deawio.iml" afterPath="$PROJECT_DIR$/deawio.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deawio/Main.java" afterPath="$PROJECT_DIR$/src/main/java/deawio/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deawio/crawler/BaseCrawler.java" afterPath="$PROJECT_DIR$/src/main/java/deawio/crawler/BaseCrawler.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deawio/crawler/HtmlCrawler.java" afterPath="$PROJECT_DIR$/src/main/java/deawio/crawler/HtmlCrawler.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java" afterPath="$PROJECT_DIR$/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deawio/crawler/BaseCrawlerTest.java" afterPath="$PROJECT_DIR$/src/test/java/deawio/crawler/BaseCrawlerTest.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deawio/Main.class" afterPath="$PROJECT_DIR$/target/classes/deawio/Main.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deawio/crawler/BaseCrawler.class" afterPath="$PROJECT_DIR$/target/classes/deawio/crawler/BaseCrawler.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deawio/crawler/HtmlCrawler.class" afterPath="$PROJECT_DIR$/target/classes/deawio/crawler/HtmlCrawler.class" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/deawio/extracter/SimpleExtracter.java" afterPath="$PROJECT_DIR$/src/main/java/deawio/extracter/SimpleExtracter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/target/classes/deawio/crawler/site/StoreSteampoweredCom.class" afterPath="$PROJECT_DIR$/target/classes/deawio/crawler/site/StoreSteampoweredCom.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/deawio/util/AppConfig.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/target/classes/deawio/extracter/SimpleExtracter.class" afterPath="$PROJECT_DIR$/target/classes/deawio/extracter/SimpleExtracter.class" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deawio.crawler.BaseCrawlerTest.xml" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-deawio.crawler.BaseCrawlerTest.xml" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-deawio.crawler.site.StoreSteampoweredComTest.xml" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-deawio.crawler.site.StoreSteampoweredComTest.xml" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/deawio.crawler.BaseCrawlerTest.txt" afterPath="$PROJECT_DIR$/target/surefire-reports/deawio.crawler.BaseCrawlerTest.txt" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/deawio/crawler/BaseCrawlerTest.class" afterPath="$PROJECT_DIR$/target/test-classes/deawio/crawler/BaseCrawlerTest.class" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/deawio.crawler.site.StoreSteampoweredComTest.txt" afterPath="$PROJECT_DIR$/target/surefire-reports/deawio.crawler.site.StoreSteampoweredComTest.txt" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/deawio/crawler/site/StoreSteampoweredComTest.class" afterPath="$PROJECT_DIR$/target/test-classes/deawio/crawler/site/StoreSteampoweredComTest.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,42 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="StoreSteampoweredCom.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#777#778#0" expanded="true" />
-                <element signature="e#801#802#0" expanded="true" />
-                <element signature="e#836#837#0" expanded="true" />
-                <element signature="e#858#859#0" expanded="true" />
-                <element signature="e#1752#1753#0" expanded="true" />
-                <element signature="e#1816#1817#0" expanded="true" />
-                <element signature="e#1866#1867#0" expanded="true" />
-                <element signature="e#1928#1929#0" expanded="true" />
-                <element signature="e#2310#2311#0" expanded="true" />
-                <element signature="e#2349#2350#0" expanded="true" />
-                <element signature="e#3700#3701#0" expanded="true" />
-                <element signature="e#3721#3722#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StoreSteampoweredComTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/deawio/crawler/site/StoreSteampoweredComTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="80" column="89" lean-forward="true" selection-start-line="80" selection-start-column="89" selection-end-line="80" selection-end-column="89" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -125,7 +78,6 @@
         <option value="$PROJECT_DIR$/src/main/java/deawio/util/MyBatisUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/deawio/crawler/HtmlCrawler.java" />
         <option value="$PROJECT_DIR$/createtests" />
-        <option value="$PROJECT_DIR$/src/main/java/deawio/extracter/SimpleExtracter.java" />
         <option value="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
         <option value="$PROJECT_DIR$/src/main/java/deawio/crawler/BaseCrawler.java" />
@@ -136,6 +88,7 @@
         <option value="$PROJECT_DIR$/src/main/java/deawio/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java" />
         <option value="$PROJECT_DIR$/src/test/java/deawio/crawler/site/StoreSteampoweredComTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/deawio/extracter/SimpleExtracter.java" />
       </list>
     </option>
   </component>
@@ -316,6 +269,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="deawio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deawio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deawio" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="deawio" type="462c0819:PsiDirectoryNode" />
               <item name="crawler" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -324,8 +286,18 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="deawio" type="462c0819:PsiDirectoryNode" />
               <item name="crawler" type="462c0819:PsiDirectoryNode" />
               <item name="site" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deawio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deawio" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="deawio" type="462c0819:PsiDirectoryNode" />
+              <item name="extracter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="deawio" type="b2602c69:ProjectViewProjectNode" />
@@ -611,7 +583,7 @@
       <workItem from="1516307969134" duration="12281000" />
       <workItem from="1516400187330" duration="11650000" />
       <workItem from="1516444535692" duration="9654000" />
-      <workItem from="1516485787980" duration="24549000" />
+      <workItem from="1516485787980" duration="27471000" />
     </task>
     <servers />
   </component>
@@ -648,11 +620,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75519000" />
+    <option name="totallyTimeSpent" value="78441000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="17" width="1366" height="751" extended-state="1" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -668,7 +639,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28323263" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32250756" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -953,14 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deawio/extracter/SimpleExtracter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/generatorConfig.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -973,14 +936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="322" column="77" lean-forward="true" selection-start-line="322" selection-start-column="77" selection-end-line="322" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1049,30 +1004,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="99" column="28" lean-forward="false" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="28" />
+        <state relative-caret-position="-1485">
+          <caret line="0" column="28" lean-forward="true" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#777#778#0" expanded="true" />
-            <element signature="e#801#802#0" expanded="true" />
-            <element signature="e#836#837#0" expanded="true" />
-            <element signature="e#858#859#0" expanded="true" />
-            <element signature="e#1752#1753#0" expanded="true" />
-            <element signature="e#1816#1817#0" expanded="true" />
-            <element signature="e#1866#1867#0" expanded="true" />
-            <element signature="e#1928#1929#0" expanded="true" />
-            <element signature="e#2310#2311#0" expanded="true" />
-            <element signature="e#2349#2350#0" expanded="true" />
-            <element signature="e#3700#3701#0" expanded="true" />
-            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#777#778#0" expanded="false" />
+            <element signature="e#801#802#0" expanded="false" />
+            <element signature="e#836#837#0" expanded="false" />
+            <element signature="e#858#859#0" expanded="false" />
+            <element signature="e#1752#1753#0" expanded="false" />
+            <element signature="e#1816#1817#0" expanded="false" />
+            <element signature="e#1866#1867#0" expanded="false" />
+            <element signature="e#1928#1929#0" expanded="false" />
+            <element signature="e#2310#2311#0" expanded="false" />
+            <element signature="e#2349#2350#0" expanded="false" />
+            <element signature="e#3700#3701#0" expanded="false" />
+            <element signature="e#3721#3722#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/deawio/crawler/site/StoreSteampoweredComTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="80" column="89" lean-forward="true" selection-start-line="80" selection-start-column="89" selection-end-line="80" selection-end-column="89" />
+        <state relative-caret-position="1512">
+          <caret line="96" column="0" lean-forward="true" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/deawio/extracter/SimpleExtracter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/deawio/extracter/SimpleExtracterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

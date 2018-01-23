@@ -5,6 +5,7 @@
 /code/projects/deawio/src/main/java/deawio/crawler/HtmlCrawler.java
 /code/projects/deawio/src/main/java/deawio/crawler/site/StoreSteampoweredCom.java
 /code/projects/deawio/src/main/java/deawio/util/MyBatisUtil.java
+/code/projects/deawio/src/main/java/deawio/crawler/SimpleExtracter.java
 /code/projects/deawio/src/main/java/deawio/mapper/ProductModelMapper.java
 /code/projects/deawio/src/main/java/deawio/mapper/DealModelMapper.java
 /code/projects/deawio/src/main/java/deawio/crawler/JsonCrawler.java
@@ -15,4 +16,3 @@
 /code/projects/deawio/src/main/java/deawio/model/StoreModel.java
 /code/projects/deawio/src/main/java/deawio/crawler/BaseCrawler.java
 /code/projects/deawio/src/main/java/deawio/Main.java
-/code/projects/deawio/src/main/java/deawio/extracter/SimpleExtracter.java

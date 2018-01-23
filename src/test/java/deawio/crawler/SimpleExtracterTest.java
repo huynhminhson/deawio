@@ -1,4 +1,4 @@
-package deawio.extracter;
+package deawio.crawler;
 
 import deawio.config.AppConfig;
 import java.io.IOException;
@@ -28,6 +28,15 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
+  public void testTextsInvalidCss() throws IOException {
+    String html =
+        IOUtils.toString(
+            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    Element body = Jsoup.parse(html).select("body").first();
+    assertTrue(simpleExtracter.texts(body, "ERROR").isEmpty());
+  }
+
+  @Test
   public void testAttrs() throws IOException {
     String html =
         IOUtils.toString(
@@ -37,11 +46,29 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
+  public void testAttrsInvalidCss() throws IOException {
+    String html =
+        IOUtils.toString(
+            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    Element body = Jsoup.parse(html).select("body").first();
+    assertTrue(simpleExtracter.attrs(body, "ERROR", "ERROR").isEmpty());
+  }
+
+  @Test
   public void testUrls() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertFalse(simpleExtracter.urls(body, "a.search_result_row", "href", baseUrl).isEmpty());
+  }
+
+  @Test
+  public void testUrlsInvalidCss() throws IOException {
+    String html =
+        IOUtils.toString(
+            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    Element body = Jsoup.parse(html).select("body").first();
+    assertTrue(simpleExtracter.urls(body, "ERROR", "ERROR", baseUrl).isEmpty());
   }
 }

@@ -2,6 +2,7 @@ package deawio.crawler.site;
 
 import deawio.crawler.BaseCrawler;
 import deawio.crawler.HtmlCrawler;
+import deawio.crawler.SimpleExtracter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
   @Autowired private ApplicationContext applicationContext;
   @Autowired private BaseCrawler baseCrawler;
+  @Autowired private SimpleExtracter simpleExtracter;
 
   public String storeName() {
     return "Steam";

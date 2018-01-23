@@ -1,4 +1,4 @@
-package deawio.extracter;
+package deawio.crawler;
 
 import java.net.MalformedURLException;
 import java.net.URL;

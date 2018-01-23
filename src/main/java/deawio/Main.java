@@ -8,10 +8,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
   public static void main(String[] args) throws InterruptedException {
     ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-    while (true) {
-      Thread t1 = new Thread(context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class));
-      t1.start();
-      t1.join();
-    }
+    Thread t1 = new Thread(context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class));
+    t1.start();
+    t1.join();
   }
 }

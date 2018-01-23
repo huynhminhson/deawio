@@ -33,16 +33,20 @@ public class BaseCrawler {
           priceString = priceString.replace(Character.toString(ch), "");
         }
       }
-      if (priceString.length() > 0) {
+      if (priceString.isEmpty()) {
+        return null;
+      } else {
         if (priceString.indexOf(",") < priceString.indexOf(".")) {
           priceString = priceString.replace(",", "");
         } else {
           priceString = priceString.replace(".", "");
           priceString = priceString.replace(",", ".");
         }
-        return Double.valueOf(priceString);
-      } else {
-        return null;
+        try {
+          return Double.valueOf(priceString);
+        } catch (Exception e) {
+          return null;
+        }
       }
     }
   }
@@ -54,7 +58,7 @@ public class BaseCrawler {
         discountString = discountString.replace(Character.toString(ch), "");
       }
     }
-    if (discountString.equals("")) {
+    if (discountString.isEmpty()) {
       return null;
     } else {
       return Double.valueOf(discountString) / 100;
@@ -76,7 +80,7 @@ public class BaseCrawler {
   public Double calcHighPrice(double discount, double low) {
     if (discount == 1) {
       if (low == 0) {
-        return 0d;
+        return (double) 0;
       } else {
         return null;
       }
@@ -174,7 +178,7 @@ public class BaseCrawler {
           productId = session.getMapper(MainMapper.class).selectLastVal();
         } catch (PersistenceException e) {
           // MOVE TO NEXT CONTAINER
-          break;
+          continue;
         }
       } else {
         ProductModel productModel = productModels.get(0);
@@ -191,14 +195,24 @@ public class BaseCrawler {
       Double dealHighPrice = htmlCrawler.dealHighPrice(container);
       Double dealDiscount = htmlCrawler.dealDiscount(container);
 
-      if (dealLowPrice != null) {
-        if (dealHighPrice != null) {
+      if (dealLowPrice == null) {
+        if (dealHighPrice != null && dealDiscount != null) {
+          dealLowPrice = calcLowPrice(dealDiscount, dealHighPrice);
+        } else {
+          continue;
+        }
+      } else if (dealHighPrice == null) {
+        if (dealDiscount != null && dealLowPrice != null) {
+          dealHighPrice = calcHighPrice(dealDiscount, dealLowPrice);
+        } else {
+          continue;
+        }
+      } else if (dealDiscount == null) {
+        if (dealLowPrice != null && dealHighPrice != null) {
           dealDiscount = calcDiscount(dealLowPrice, dealHighPrice);
         } else {
-          dealHighPrice = calcHighPrice(dealDiscount, dealLowPrice);
+          continue;
         }
-      } else {
-        dealLowPrice = calcLowPrice(dealDiscount, dealHighPrice);
       }
 
       // INSERT OR UPDATE DEAL
@@ -214,16 +228,21 @@ public class BaseCrawler {
         dealModel.setLowPrice(dealLowPrice);
         dealModel.setHighPrice(dealHighPrice);
         dealModel.setDiscount(dealDiscount);
+        dealModel.setProductId(productId);
+        dealModel.setStoreId(storeId);
 
         try {
           session.getMapper(DealModelMapper.class).insertSelective(dealModel);
         } catch (PersistenceException e) {
+          e.printStackTrace();
         }
       } else {
         DealModel dealModel = dealModels.get(0);
         dealModel.setLowPrice(dealLowPrice);
         dealModel.setHighPrice(dealHighPrice);
         dealModel.setDiscount(dealDiscount);
+        dealModel.setProductId(productId);
+        dealModel.setStoreId(storeId);
 
         session.getMapper(DealModelMapper.class).updateByPrimaryKeySelective(dealModel);
       }
@@ -241,7 +260,7 @@ public class BaseCrawler {
         nextUrls.add(paginationUrl);
       }
     }
-    if (nextUrls.size() > 0) {
+    if (!nextUrls.isEmpty()) {
       crawlHtml(htmlCrawler, nextUrls.get(0), processed);
     }
   }

@@ -72,7 +72,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     if (discountStrings.isEmpty()) {
       return null;
     } else {
-      if (discountStrings.get(0).equals("")) {
+      if (discountStrings.get(0).isEmpty()) {
         List<String> priceStrings =
             simpleExtracter.texts(container, "div.col.search_price.responsive_secondrow");
         if (priceStrings.isEmpty()) {
@@ -99,7 +99,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     if (discountStrings.isEmpty()) {
       return null;
     } else {
-      if (discountStrings.get(0).equals("")) {
+      if (discountStrings.get(0).isEmpty()) {
         List<String> priceStrings =
             simpleExtracter.texts(container, "div.col.search_price.responsive_secondrow");
         if (priceStrings.isEmpty()) {
@@ -114,7 +114,8 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
         if (priceStrings.isEmpty()) {
           return null;
         } else {
-          return baseCrawler.extractPrice(priceStrings.get(0));
+          String[] chunks = priceStrings.get(0).split("£");
+          return baseCrawler.extractPrice(chunks[chunks.length - 1]);
         }
       }
     }

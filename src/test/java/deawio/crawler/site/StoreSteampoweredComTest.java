@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.Validate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -27,7 +26,9 @@ public class StoreSteampoweredComTest extends TestCase {
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     List<String> paginationUrls = storeSteampoweredCom.paginationUrls(html, baseUrl);
-    assertFalse(paginationUrls.isEmpty());
+    assertTrue(
+        paginationUrls.contains(
+            "http://store.steampowered.com/search/?sort_by=&sort_order=0&category1=998&special_categories=&tags=-1&page=2"));
   }
 
   @Test
@@ -60,7 +61,7 @@ public class StoreSteampoweredComTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element container = storeSteampoweredCom.containers(html).get(0);
     String productName = storeSteampoweredCom.productName(container);
-    Validate.notBlank(productName);
+    assertEquals(productName, "Counter-Strike: Global Offensive");
   }
 
   @Test
@@ -78,7 +79,9 @@ public class StoreSteampoweredComTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element container = storeSteampoweredCom.containers(html).get(0);
     String productImageUrl = storeSteampoweredCom.productImageUrl(container, baseUrl);
-    Validate.notBlank(productImageUrl);
+    assertEquals(
+        productImageUrl,
+        "http://cdn.edgecast.steamstatic.com/steam/apps/730/capsule_sm_120.jpg?t=1513742714");
   }
 
   @Test
@@ -96,7 +99,9 @@ public class StoreSteampoweredComTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element container = storeSteampoweredCom.containers(html).get(0);
     String dealUrl = storeSteampoweredCom.dealUrl(container, baseUrl);
-    Validate.notBlank(dealUrl);
+    assertEquals(
+        dealUrl,
+        "http://store.steampowered.com/app/730/CounterStrike_Global_Offensive/?snr=1_7_7_230_150_1");
   }
 
   @Test
@@ -114,7 +119,15 @@ public class StoreSteampoweredComTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element container = storeSteampoweredCom.containers(html).get(0);
     Double dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
-    Validate.notNull(dealHighPrice);
+    assertEquals(dealHighPrice, 11.99);
+
+    container = storeSteampoweredCom.containers(html).get(1);
+    dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
+    assertEquals(dealHighPrice, 26.99);
+
+    container = storeSteampoweredCom.containers(html).get(2);
+    dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
+    assertEquals(dealHighPrice, 23.99);
   }
 
   @Test
@@ -132,7 +145,15 @@ public class StoreSteampoweredComTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element container = storeSteampoweredCom.containers(html).get(0);
     Double dealLowPrice = storeSteampoweredCom.dealLowPrice(container);
-    Validate.notNull(dealLowPrice);
+    assertEquals(dealLowPrice, 11.99);
+
+    container = storeSteampoweredCom.containers(html).get(1);
+    dealLowPrice = storeSteampoweredCom.dealLowPrice(container);
+    assertEquals(dealLowPrice, 26.99);
+
+    container = storeSteampoweredCom.containers(html).get(2);
+    dealLowPrice = storeSteampoweredCom.dealLowPrice(container);
+    assertEquals(dealLowPrice, 7.91);
   }
 
   @Test

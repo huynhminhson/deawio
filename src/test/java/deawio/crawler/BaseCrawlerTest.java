@@ -15,7 +15,6 @@ public class BaseCrawlerTest extends TestCase {
 
   @Test
   public void testExtractPrice() {
-    // BaseCrawler baseCrawler = context.getBean("baseCrawler", BaseCrawler.class);
     assertEquals(baseCrawler.extractPrice("Free"), (double) 0);
     assertEquals(baseCrawler.extractPrice("free"), (double) 0);
     assertEquals(baseCrawler.extractPrice("$99"), (double) 99);
@@ -28,7 +27,6 @@ public class BaseCrawlerTest extends TestCase {
 
   @Test
   public void testExtractDiscount() {
-    BaseCrawler baseCrawler = new BaseCrawler();
     assertEquals(baseCrawler.extractDiscount("99"), (double) 0.99);
     assertEquals(baseCrawler.extractDiscount("99%"), (double) 0.99);
     assertEquals(baseCrawler.extractDiscount("99% OFF"), (double) 0.99);
@@ -37,7 +35,6 @@ public class BaseCrawlerTest extends TestCase {
 
   @Test
   public void testCalcDiscount() {
-    BaseCrawler baseCrawler = new BaseCrawler();
     assertEquals(baseCrawler.calcDiscount(5, 10), (double) 0.5);
     assertEquals(baseCrawler.calcDiscount(0, 10), (double) 1);
     assertEquals(baseCrawler.calcDiscount(0, 0), (double) 1);
@@ -46,7 +43,6 @@ public class BaseCrawlerTest extends TestCase {
 
   @Test
   public void testCalcHighPrice() {
-    BaseCrawler baseCrawler = new BaseCrawler();
     assertEquals(baseCrawler.calcHighPrice(0.5, 5), (double) 10);
     assertEquals(baseCrawler.calcHighPrice(1, 0), (double) 0);
     assertEquals(baseCrawler.calcHighPrice(1, 10), null);
@@ -54,7 +50,6 @@ public class BaseCrawlerTest extends TestCase {
 
   @Test
   public void testCalcLowPrice() {
-    BaseCrawler baseCrawler = new BaseCrawler();
     assertEquals(baseCrawler.calcLowPrice(0.5, 10), (double) 5);
   }
 }

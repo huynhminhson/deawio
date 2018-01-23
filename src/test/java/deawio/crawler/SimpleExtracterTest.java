@@ -25,6 +25,7 @@ public class SimpleExtracterTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertFalse(simpleExtracter.texts(body, "a.search_result_row").isEmpty());
+    assertFalse(simpleExtracter.texts(html, "a.search_result_row").isEmpty());
   }
 
   @Test
@@ -34,6 +35,7 @@ public class SimpleExtracterTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertTrue(simpleExtracter.texts(body, "ERROR").isEmpty());
+    assertTrue(simpleExtracter.texts(html, "ERROR").isEmpty());
   }
 
   @Test
@@ -43,6 +45,7 @@ public class SimpleExtracterTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertFalse(simpleExtracter.attrs(body, "a.search_result_row", "href").isEmpty());
+    assertFalse(simpleExtracter.attrs(html, "a.search_result_row", "href").isEmpty());
   }
 
   @Test
@@ -52,6 +55,7 @@ public class SimpleExtracterTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertTrue(simpleExtracter.attrs(body, "ERROR", "ERROR").isEmpty());
+    assertTrue(simpleExtracter.attrs(html, "ERROR", "ERROR").isEmpty());
   }
 
   @Test
@@ -61,6 +65,7 @@ public class SimpleExtracterTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertFalse(simpleExtracter.urls(body, "a.search_result_row", "href", baseUrl).isEmpty());
+    assertFalse(simpleExtracter.urls(html, "a.search_result_row", "href", baseUrl).isEmpty());
   }
 
   @Test
@@ -70,5 +75,6 @@ public class SimpleExtracterTest extends TestCase {
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
     Element body = Jsoup.parse(html).select("body").first();
     assertTrue(simpleExtracter.urls(body, "ERROR", "ERROR", baseUrl).isEmpty());
+    assertTrue(simpleExtracter.urls(html, "ERROR", "ERROR", baseUrl).isEmpty());
   }
 }

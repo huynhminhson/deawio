@@ -6,6 +6,7 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
@@ -65,7 +66,7 @@ public class StoreSteampoweredComTest extends TestCase {
   @Test
   public void testProductNameSiteChanged() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
-    Element container = storeSteampoweredCom.containers(html).get(0);
+    Element container = Jsoup.parse("<div></div>").select("div").first();
     String productName = storeSteampoweredCom.productName(container);
     assertNull(productName);
   }
@@ -83,7 +84,7 @@ public class StoreSteampoweredComTest extends TestCase {
   @Test
   public void testProductImageUrlSiteChanged() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
-    Element container = storeSteampoweredCom.containers(html).get(0);
+    Element container = Jsoup.parse("<div></div>").select("div").first();
     String productImageUrl = storeSteampoweredCom.productImageUrl(container, baseUrl);
     assertNull(productImageUrl);
   }
@@ -101,7 +102,7 @@ public class StoreSteampoweredComTest extends TestCase {
   @Test
   public void testDealUrlSiteChanged() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
-    Element container = storeSteampoweredCom.containers(html).get(0);
+    Element container = Jsoup.parse("<div></div>").select("div").first();
     String dealUrl = storeSteampoweredCom.dealUrl(container, baseUrl);
     assertNull(dealUrl);
   }
@@ -119,7 +120,7 @@ public class StoreSteampoweredComTest extends TestCase {
   @Test
   public void testDealHighPriceSiteChanged() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
-    Element container = storeSteampoweredCom.containers(html).get(0);
+    Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
     assertNull(dealHighPrice);
   }
@@ -137,7 +138,7 @@ public class StoreSteampoweredComTest extends TestCase {
   @Test
   public void testDealLowPriceSiteChanged() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
-    Element container = storeSteampoweredCom.containers(html).get(0);
+    Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealLowPrice = storeSteampoweredCom.dealLowPrice(container);
     assertNull(dealLowPrice);
   }

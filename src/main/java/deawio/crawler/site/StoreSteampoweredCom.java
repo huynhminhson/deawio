@@ -3,13 +3,9 @@ package deawio.crawler.site;
 import deawio.crawler.BaseCrawler;
 import deawio.crawler.HtmlCrawler;
 import deawio.crawler.SimpleExtracter;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import org.apache.commons.lang3.Validate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
-  @Autowired private ApplicationContext applicationContext;
+  @Autowired private ApplicationContext context;
   @Autowired private BaseCrawler baseCrawler;
   @Autowired private SimpleExtracter simpleExtracter;
 
@@ -36,26 +32,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
   }
 
   public List<String> paginationUrls(String html, String baseUrl) {
-    List<String> paginationUrls = new ArrayList<>();
-    Elements elements = Jsoup.parse(html).select("div.search_pagination_right a");
-    if (elements != null) {
-      for (Element element : elements) {
-        String href = element.attr("href");
-        String joined = null;
-        try {
-          joined = new URL(new URL(baseUrl), href).toString();
-        } catch (MalformedURLException e) {
-        }
-        try {
-          Validate.notBlank(joined);
-          if (!paginationUrls.contains(joined)) {
-            paginationUrls.add(joined);
-          }
-        } catch (Exception e) {
-        }
-      }
-    }
-    return paginationUrls;
+    return simpleExtracter.urls(html, "div.search_pagination_right a", "href", baseUrl);
   }
 
   public Elements containers(String html) {
@@ -63,57 +40,83 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
   }
 
   public String productName(Element container) {
-    return container.select("span.title").first().text();
+    List<String> texts = simpleExtracter.texts(container, "span.title");
+    if (texts.isEmpty()) {
+      return null;
+    } else {
+      return texts.get(0);
+    }
   }
 
   public String productImageUrl(Element container, String baseUrl) {
-    String url = container.select("img").first().attr("src");
-    URL mergedURL = null;
-    try {
-      return new URL(new URL(baseUrl), url).toString();
-    } catch (MalformedURLException e) {
-      e.printStackTrace();
+    List<String> urls = simpleExtracter.urls(container, "img", "src", baseUrl);
+    if (urls.isEmpty()) {
       return null;
+    } else {
+      return urls.get(0);
     }
   }
 
   public String dealUrl(Element container, String baseUrl) {
-    return container.attr("href");
+    List<String> urls = simpleExtracter.urls(container, "a", "href", baseUrl);
+    if (urls.isEmpty()) {
+      return null;
+    } else {
+      return urls.get(0);
+    }
   }
 
   public Double dealHighPrice(Element container) {
-    String discountString =
-        container.select("div.col.search_discount.responsive_secondrow").text().trim();
-    if (discountString.equals("")) {
-      String priceString =
-          container.select("div.col.search_price.responsive_secondrow").first().text().trim();
-      return baseCrawler.extractPrice(priceString);
+    List<String> discountStrings =
+        simpleExtracter.texts(container, "div.col.search_discount.responsive_secondrow");
+    if (discountStrings.isEmpty()) {
+      return null;
     } else {
-      String priceString =
-          container
-              .select("div.col.search_price.discounted.responsive_secondrow strike")
-              .first()
-              .text()
-              .trim();
-      return baseCrawler.extractPrice(priceString);
+      if (discountStrings.get(0).equals("")) {
+        List<String> priceStrings =
+            simpleExtracter.texts(container, "div.col.search_price.responsive_secondrow");
+        if (priceStrings.isEmpty()) {
+          return null;
+        } else {
+          return baseCrawler.extractPrice(priceStrings.get(0));
+        }
+      } else {
+        List<String> priceStrings =
+            simpleExtracter.texts(
+                container, "div.col.search_price.discounted.responsive_secondrow strike");
+        if (priceStrings.isEmpty()) {
+          return null;
+        } else {
+          return baseCrawler.extractPrice(priceStrings.get(0));
+        }
+      }
     }
   }
 
   public Double dealLowPrice(Element container) {
-    String discountString =
-        container.select("div.col.search_discount.responsive_secondrow").text().trim();
-    if (discountString.equals("")) {
-      String priceString =
-          container.select("div.col.search_price.responsive_secondrow").first().text().trim();
-      return baseCrawler.extractPrice(priceString);
+    List<String> discountStrings =
+        simpleExtracter.texts(container, "div.col.search_discount.responsive_secondrow");
+    if (discountStrings.isEmpty()) {
+      return null;
     } else {
-      String priceString =
-          container
-              .select("div.col.search_price.discounted.responsive_secondrow")
-              .first()
-              .text()
-              .trim();
-      return baseCrawler.extractPrice(priceString);
+      if (discountStrings.get(0).equals("")) {
+        List<String> priceStrings =
+            simpleExtracter.texts(container, "div.col.search_price.responsive_secondrow");
+        if (priceStrings.isEmpty()) {
+          return null;
+        } else {
+          return baseCrawler.extractPrice(priceStrings.get(0));
+        }
+      } else {
+        List<String> priceStrings =
+            simpleExtracter.texts(
+                container, "div.col.search_price.discounted.responsive_secondrow");
+        if (priceStrings.isEmpty()) {
+          return null;
+        } else {
+          return baseCrawler.extractPrice(priceStrings.get(0));
+        }
+      }
     }
   }
 
@@ -123,7 +126,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
 
   public void run() {
     StoreSteampoweredCom storeSteampoweredCom =
-        applicationContext.getBean("storeSteampoweredCom", StoreSteampoweredCom.class);
+        context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class);
     for (String url : storeSteampoweredCom.startUrls()) {
       baseCrawler.crawlHtml(storeSteampoweredCom, url, new HashSet<>());
     }

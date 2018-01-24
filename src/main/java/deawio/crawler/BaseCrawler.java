@@ -213,16 +213,19 @@ public class BaseCrawler {
         } else {
           continue;
         }
+      } else {
+        continue;
       }
 
       // INSERT OR UPDATE DEAL
       DealModelExample dealModelExample = new DealModelExample();
+      dealModelExample.or().andProductIdEqualTo(productId).andStoreIdEqualTo(storeId);
       dealModelExample.or().andUrlEqualTo(dealUrl);
 
       List<DealModel> dealModels =
           session.getMapper(DealModelMapper.class).selectByExample(dealModelExample);
 
-      if (dealModels.size() == 0) {
+      if (dealModels.isEmpty()) {
         DealModel dealModel = new DealModel();
         dealModel.setUrl(dealUrl);
         dealModel.setLowPrice(dealLowPrice);
@@ -231,13 +234,10 @@ public class BaseCrawler {
         dealModel.setProductId(productId);
         dealModel.setStoreId(storeId);
 
-        try {
-          session.getMapper(DealModelMapper.class).insertSelective(dealModel);
-        } catch (PersistenceException e) {
-          e.printStackTrace();
-        }
+        session.getMapper(DealModelMapper.class).insertSelective(dealModel);
       } else {
         DealModel dealModel = dealModels.get(0);
+        dealModel.setUrl(dealUrl);
         dealModel.setLowPrice(dealLowPrice);
         dealModel.setHighPrice(dealHighPrice);
         dealModel.setDiscount(dealDiscount);
@@ -261,6 +261,10 @@ public class BaseCrawler {
       }
     }
     if (!nextUrls.isEmpty()) {
+      try {
+        Thread.sleep(10000);
+      } catch (InterruptedException e) {
+      }
       crawlHtml(htmlCrawler, nextUrls.get(0), processed);
     }
   }

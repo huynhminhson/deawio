@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: deawio.crawler.site.StoreSteampoweredComTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.34 sec
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.317 sec

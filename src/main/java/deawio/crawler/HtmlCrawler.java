@@ -6,6 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public interface HtmlCrawler {
+  public boolean isValidHtml(String html);
+
   public String storeName();
 
   public String storeCurrency();

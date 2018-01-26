@@ -1,8 +1,10 @@
 deawio/crawler/JsonCrawler.class
 deawio/Main.class
+deawio/base/MyBatisUtil.class
 deawio/model/ProductModelExample.class
 deawio/model/DealModelExample$Criteria.class
 deawio/model/DealModelExample$GeneratedCriteria.class
+deawio/web/Web.class
 deawio/model/StoreModelExample.class
 deawio/mapper/ProductModelMapper.class
 deawio/crawler/SimpleExtracter.class
@@ -20,7 +22,7 @@ deawio/model/StoreModel.class
 deawio/crawler/HtmlCrawler.class
 deawio/model/StoreModelExample$Criterion.class
 deawio/model/ProductModelExample$Criterion.class
-deawio/util/MyBatisUtil.class
 deawio/model/StoreModelExample$GeneratedCriteria.class
 deawio/mapper/StoreModelMapper.class
 deawio/model/DealModel.class
+deawio/base/AppConfig.class

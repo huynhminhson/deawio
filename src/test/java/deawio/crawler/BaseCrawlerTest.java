@@ -1,6 +1,6 @@
 package deawio.crawler;
 
-import deawio.config.AppConfig;
+import deawio.base.AppConfig;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,4 +52,19 @@ public class BaseCrawlerTest extends TestCase {
   public void testCalcLowPrice() {
     assertEquals(baseCrawler.calcLowPrice(0.5, 10), (double) 5);
   }
+
+  @Test
+  public void shouldHaveOneNewRecordWhenInsertNewStoreRecord() {}
+
+  @Test
+  public void shouldHaveOneNewRecordWhenInsertNewProductRecord() {}
+
+  @Test
+  public void shouldUpdateRecordWhenInsertExistingProductRecord() {}
+
+  @Test
+  public void shouldHaveOneNewRecordWhenInsertNewDealValues() {}
+
+  @Test
+  public void shouldUpdateExistingRecordWhenInsertExistingDeal() {}
 }

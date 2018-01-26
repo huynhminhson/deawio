@@ -62,3 +62,32 @@ CREATE TRIGGER auto_modified
   BEFORE UPDATE
   ON deal
   FOR EACH ROW EXECUTE PROCEDURE auto_modified();
+
+
+CREATE TABLE guest (
+  guest_id SERIAL PRIMARY KEY,
+  created  TIMESTAMPTZ  NOT NULL DEFAULT now(),
+  modified TIMESTAMPTZ  NOT NULL DEFAULT now(),
+  email    VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  UNIQUE (email)
+);
+CREATE TRIGGER auto_modified
+  BEFORE UPDATE
+  ON guest
+  FOR EACH ROW EXECUTE PROCEDURE auto_modified();
+
+
+CREATE TABLE watch (
+  watch_id   SERIAL PRIMARY KEY,
+  created    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  modified   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  guest_id   INT         NOT NULL REFERENCES guest (guest_id) ON DELETE CASCADE,
+  product_id INT         NOT NULL REFERENCES product (product_id) ON DELETE CASCADE,
+  price      FLOAT       NOT NULL,
+  UNIQUE (guest_id, product_id)
+);
+CREATE TRIGGER auto_modified
+  BEFORE UPDATE
+  ON watch
+  FOR EACH ROW EXECUTE PROCEDURE auto_modified();

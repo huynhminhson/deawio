@@ -1,6 +1,6 @@
 package deawio.crawler;
 
-import deawio.config.AppConfig;
+import deawio.base.AppConfig;
 import java.io.IOException;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;

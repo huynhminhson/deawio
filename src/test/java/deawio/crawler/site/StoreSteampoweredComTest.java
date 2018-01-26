@@ -1,6 +1,6 @@
 package deawio.crawler.site;
 
-import deawio.config.AppConfig;
+import deawio.base.AppConfig;
 import java.io.IOException;
 import java.util.List;
 import junit.framework.TestCase;
@@ -19,6 +19,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class StoreSteampoweredComTest extends TestCase {
   @Autowired private StoreSteampoweredCom storeSteampoweredCom;
   private static String baseUrl = "http://store.steampowered.com/search/?tags=-1&category1=998";
+
+  @Test
+  public void isValidHtmlShouldBeTrue() throws IOException {
+    String html =
+        IOUtils.toString(
+            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    assertTrue(storeSteampoweredCom.isValidHtml(html));
+  }
+
+  @Test
+  public void isValidHtmlShouldBeFalse() throws IOException {
+    String html = "<div></div>";
+    assertFalse(storeSteampoweredCom.isValidHtml(html));
+  }
 
   @Test
   public void testPaginationUrls() throws IOException {

@@ -1,6 +1,6 @@
 package deawio;
 
-import deawio.config.AppConfig;
+import deawio.base.AppConfig;
 import deawio.crawler.site.StoreSteampoweredCom;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

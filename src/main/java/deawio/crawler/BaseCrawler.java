@@ -1,11 +1,11 @@
 package deawio.crawler;
 
+import deawio.base.MyBatisUtil;
 import deawio.mapper.DealModelMapper;
 import deawio.mapper.MainMapper;
 import deawio.mapper.ProductModelMapper;
 import deawio.mapper.StoreModelMapper;
 import deawio.model.*;
-import deawio.util.MyBatisUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,37 +93,137 @@ public class BaseCrawler {
     return (1 - discount) * high;
   }
 
-  public void crawlHtml(HtmlCrawler htmlCrawler, String url, Set<String> processed) {
+  public Integer upsertStore(StoreModel storeModel) {
     // OPEN NEW DB SESSION
     SqlSession session = MyBatisUtil.sqlSessionFactory.openSession(true);
 
     // INSERT OR UPDATE NEW STORE
     StoreModelExample storeModelExample = new StoreModelExample();
-    storeModelExample.or().andNameEqualTo(htmlCrawler.storeName());
+    storeModelExample.or().andNameEqualTo(storeModel.getName());
 
     List<StoreModel> storeModels =
         session.getMapper(StoreModelMapper.class).selectByExample(storeModelExample);
 
     // GET STORE ID
     Integer storeId = null;
-    if (storeModels.size() == 0) {
-      StoreModel storeModel = new StoreModel();
-      storeModel.setName(htmlCrawler.storeName());
-      storeModel.setCurrency(htmlCrawler.storeCurrency());
 
-      session.getMapper(StoreModelMapper.class).insertSelective(storeModel);
-      storeId = session.getMapper(MainMapper.class).selectLastVal();
+    if (storeModels.isEmpty()) {
+      StoreModel record = new StoreModel();
+      record.setName(storeModel.getName());
+      record.setCurrency(storeModel.getCurrency());
+
+      try {
+        session.getMapper(StoreModelMapper.class).insertSelective(record);
+        storeId = session.getMapper(MainMapper.class).selectLastVal();
+      } catch (PersistenceException e) {
+      }
     } else {
       storeId = storeModels.get(0).getStoreId();
+    }
+
+    // CLOSE SESSION
+    session.close();
+
+    return storeId;
+  }
+
+  public Integer upsertProduct(ProductModel productModel) {
+    // DB SESSION
+    SqlSession session = MyBatisUtil.sqlSessionFactory.openSession(true);
+
+    // INSERT OR UPDATE PRODUCT
+    ProductModelExample productModelExample = new ProductModelExample();
+    productModelExample.or().andCodeEqualTo(productModel.getCode());
+
+    List<ProductModel> productModels =
+        session.getMapper(ProductModelMapper.class).selectByExample(productModelExample);
+
+    // PRODUCT ID
+    Integer productId = null;
+
+    if (productModels.isEmpty()) {
+      ProductModel record = new ProductModel();
+      record.setName(productModel.getName());
+      record.setCode(productModel.getCode());
+      record.setImageUrl(productModel.getImageUrl());
+
+      try {
+        session.getMapper(ProductModelMapper.class).insertSelective(record);
+        productId = session.getMapper(MainMapper.class).selectLastVal();
+      } catch (PersistenceException e) {
+      }
+    } else {
+      ProductModel record = productModels.get(0);
+      record.setName(productModel.getName());
+      record.setCode(productModel.getCode());
+      record.setImageUrl(productModel.getImageUrl());
+
+      session.getMapper(ProductModelMapper.class).updateByPrimaryKeySelective(record);
+      productId = productModels.get(0).getProductId();
+    }
+
+    // CLOSE SESSION
+    session.close();
+
+    return productId;
+  }
+
+  public void upsertDeal(DealModel dealModel) {
+    // DB SESSION
+    SqlSession session = MyBatisUtil.sqlSessionFactory.openSession(true);
+
+    // INSERT OR UPDATE DEAL
+    DealModelExample dealModelExample = new DealModelExample();
+    dealModelExample
+        .or()
+        .andProductIdEqualTo(dealModel.getProductId())
+        .andStoreIdEqualTo(dealModel.getStoreId());
+    dealModelExample.or().andUrlEqualTo(dealModel.getUrl());
+
+    List<DealModel> dealModels =
+        session.getMapper(DealModelMapper.class).selectByExample(dealModelExample);
+
+    if (dealModels.isEmpty()) {
+      DealModel record = new DealModel();
+      record.setUrl(dealModel.getUrl());
+      record.setLowPrice(dealModel.getLowPrice());
+      record.setHighPrice(dealModel.getHighPrice());
+      record.setDiscount(dealModel.getDiscount());
+      record.setProductId(dealModel.getProductId());
+      record.setStoreId(dealModel.getStoreId());
+
+      session.getMapper(DealModelMapper.class).insertSelective(dealModel);
+    } else {
+      DealModel record = dealModels.get(0);
+      record.setUrl(dealModel.getUrl());
+      record.setLowPrice(dealModel.getLowPrice());
+      record.setHighPrice(dealModel.getHighPrice());
+      record.setDiscount(dealModel.getDiscount());
+      record.setProductId(dealModel.getProductId());
+      record.setStoreId(dealModel.getStoreId());
+
+      session.getMapper(DealModelMapper.class).updateByPrimaryKeySelective(dealModel);
+    }
+
+    // CLOSE DB SESSION
+    session.close();
+  }
+
+  public void crawlHtml(HtmlCrawler htmlCrawler, String url, Set<String> processed) {
+    StoreModel storeModel = new StoreModel();
+    storeModel.setName(htmlCrawler.storeName());
+    storeModel.setCurrency(htmlCrawler.storeCurrency());
+
+    Integer storeId = upsertStore(storeModel);
+    if (storeId == null) {
+      return;
     }
 
     // FETCH REMOTE HTML
     String html = null;
 
-    // HTTP CLIENT
-    HttpClient httpClient = HttpClientBuilder.create().build();
-
     // FETCH FIRST PAGE
+    HttpClient httpClient = HttpClientBuilder.create().build();
     HttpGet listingPage = new HttpGet(url);
     listingPage.setHeader(
         "User-Agent",
@@ -131,12 +231,20 @@ public class BaseCrawler {
 
     try {
       html = EntityUtils.toString(httpClient.execute(listingPage).getEntity());
+      System.out.println(">>> FETCHING " + url);
     } catch (IOException e) {
-      // RETURN ON FETCH ERROR
+      return;
+    }
+
+    if (html == null || html.isEmpty()) {
       return;
     }
 
     Elements containers = htmlCrawler.containers(html);
+    if (containers == null || containers.isEmpty()) {
+      return;
+    }
+
     for (Element container : containers) {
       String productName = htmlCrawler.productName(container);
       String productImageUrl = htmlCrawler.productImageUrl(container, url);
@@ -145,7 +253,6 @@ public class BaseCrawler {
         Validate.notBlank(productName);
         Validate.notBlank(productImageUrl);
       } catch (Exception e) {
-        // MOVE TO NEXT CONTAINER
         continue;
       }
 
@@ -158,36 +265,14 @@ public class BaseCrawler {
         }
       }
 
-      // INSERT OR UPDATE PRODUCT
-      ProductModelExample productModelExample = new ProductModelExample();
-      productModelExample.or().andCodeEqualTo(productCode);
+      ProductModel productModel = new ProductModel();
+      productModel.setName(productName);
+      productModel.setCode(productCode);
+      productModel.setImageUrl(productImageUrl);
 
-      List<ProductModel> productModels =
-          session.getMapper(ProductModelMapper.class).selectByExample(productModelExample);
-
-      // GET PRODUCT ID
-      Integer productId = null;
-      if (productModels.size() == 0) {
-        ProductModel productModel = new ProductModel();
-        productModel.setName(productName);
-        productModel.setCode(productCode);
-        productModel.setImageUrl(productImageUrl);
-
-        try {
-          session.getMapper(ProductModelMapper.class).insertSelective(productModel);
-          productId = session.getMapper(MainMapper.class).selectLastVal();
-        } catch (PersistenceException e) {
-          // MOVE TO NEXT CONTAINER
-          continue;
-        }
-      } else {
-        ProductModel productModel = productModels.get(0);
-        productModel.setName(productName);
-        productModel.setCode(productCode);
-        productModel.setImageUrl(productImageUrl);
-
-        session.getMapper(ProductModelMapper.class).updateByPrimaryKeySelective(productModel);
-        productId = productModels.get(0).getProductId();
+      Integer productId = upsertProduct(productModel);
+      if (productId == null) {
+        continue;
       }
 
       String dealUrl = htmlCrawler.dealUrl(container, url);
@@ -213,47 +298,22 @@ public class BaseCrawler {
         } else {
           continue;
         }
-      } else {
-        continue;
       }
 
-      // INSERT OR UPDATE DEAL
-      DealModelExample dealModelExample = new DealModelExample();
-      dealModelExample.or().andProductIdEqualTo(productId).andStoreIdEqualTo(storeId);
-      dealModelExample.or().andUrlEqualTo(dealUrl);
+      DealModel dealModel = new DealModel();
+      dealModel.setUrl(dealUrl);
+      dealModel.setLowPrice(dealLowPrice);
+      dealModel.setHighPrice(dealHighPrice);
+      dealModel.setDiscount(dealDiscount);
+      dealModel.setProductId(productId);
+      dealModel.setStoreId(storeId);
 
-      List<DealModel> dealModels =
-          session.getMapper(DealModelMapper.class).selectByExample(dealModelExample);
-
-      if (dealModels.isEmpty()) {
-        DealModel dealModel = new DealModel();
-        dealModel.setUrl(dealUrl);
-        dealModel.setLowPrice(dealLowPrice);
-        dealModel.setHighPrice(dealHighPrice);
-        dealModel.setDiscount(dealDiscount);
-        dealModel.setProductId(productId);
-        dealModel.setStoreId(storeId);
-
-        session.getMapper(DealModelMapper.class).insertSelective(dealModel);
-      } else {
-        DealModel dealModel = dealModels.get(0);
-        dealModel.setUrl(dealUrl);
-        dealModel.setLowPrice(dealLowPrice);
-        dealModel.setHighPrice(dealHighPrice);
-        dealModel.setDiscount(dealDiscount);
-        dealModel.setProductId(productId);
-        dealModel.setStoreId(storeId);
-
-        session.getMapper(DealModelMapper.class).updateByPrimaryKeySelective(dealModel);
-      }
+      upsertDeal(dealModel);
     }
 
-    // CLOSE DATABASE SESSION
-    session.close();
-
-    List<String> paginationUrls = htmlCrawler.paginationUrls(html, url);
     processed.add(url);
 
+    List<String> paginationUrls = htmlCrawler.paginationUrls(html, url);
     List<String> nextUrls = new ArrayList<>();
     for (String paginationUrl : paginationUrls) {
       if (!processed.contains(paginationUrl)) {

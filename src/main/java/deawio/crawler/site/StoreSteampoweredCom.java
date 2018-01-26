@@ -1,11 +1,15 @@
 package deawio.crawler.site;
 
 import deawio.crawler.BaseCrawler;
+import deawio.crawler.CssSkeleton;
 import deawio.crawler.HtmlCrawler;
 import deawio.crawler.SimpleExtracter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,27 +22,64 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
   @Autowired private ApplicationContext context;
   @Autowired private BaseCrawler baseCrawler;
   @Autowired private SimpleExtracter simpleExtracter;
+  @Autowired private CssSkeleton cssSkeleton;
 
+  @Override
+  public boolean isValidHtml(String html) {
+    try {
+      html = Jsoup.parse(html).select("div#search_result_container").first().html();
+    } catch (NullPointerException e) {
+      return false;
+    }
+    Set<String> htmlCssSkeleton = new HashSet<>();
+    for (String string : cssSkeleton.parseDocument(html)) {
+      htmlCssSkeleton.add(string);
+    }
+    String sample = null;
+    try {
+      sample =
+          IOUtils.toString(
+              this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    } catch (IOException e) {
+    }
+    sample = Jsoup.parse(sample).select("div#search_result_container").first().html();
+    Set<String> sampleCssSkeleton = new HashSet<>();
+    for (String string : cssSkeleton.parseDocument(sample)) {
+      sampleCssSkeleton.add(string);
+    }
+    if (htmlCssSkeleton.equals(sampleCssSkeleton)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @Override
   public String storeName() {
     return "Steam";
   }
 
+  @Override
   public String storeCurrency() {
     return "GBP";
   }
 
+  @Override
   public List<String> startUrls() {
     return Arrays.asList("http://store.steampowered.com/search/?tags=-1&category1=998");
   }
 
+  @Override
   public List<String> paginationUrls(String html, String baseUrl) {
     return simpleExtracter.urls(html, "div.search_pagination_right a", "href", baseUrl);
   }
 
+  @Override
   public Elements containers(String html) {
     return Jsoup.parse(html).select("a.search_result_row");
   }
 
+  @Override
   public String productName(Element container) {
     List<String> texts = simpleExtracter.texts(container, "span.title");
     if (texts.isEmpty()) {
@@ -48,6 +89,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     }
   }
 
+  @Override
   public String productImageUrl(Element container, String baseUrl) {
     List<String> urls = simpleExtracter.urls(container, "img", "src", baseUrl);
     if (urls.isEmpty()) {
@@ -57,6 +99,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     }
   }
 
+  @Override
   public String dealUrl(Element container, String baseUrl) {
     List<String> urls = simpleExtracter.urls(container, "a", "href", baseUrl);
     if (urls.isEmpty()) {
@@ -66,6 +109,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     }
   }
 
+  @Override
   public Double dealHighPrice(Element container) {
     List<String> discountStrings =
         simpleExtracter.texts(container, "div.col.search_discount.responsive_secondrow");
@@ -93,6 +137,7 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     }
   }
 
+  @Override
   public Double dealLowPrice(Element container) {
     List<String> discountStrings =
         simpleExtracter.texts(container, "div.col.search_discount.responsive_secondrow");
@@ -121,10 +166,12 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
     }
   }
 
+  @Override
   public Double dealDiscount(Element container) {
     return null;
   }
 
+  @Override
   public void run() {
     StoreSteampoweredCom storeSteampoweredCom =
         context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class);

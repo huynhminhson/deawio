@@ -217,9 +217,10 @@ public class BaseCrawler {
     }
 
     // FETCH REMOTE HTML
-    WebDriver webDriver = BrowserUtil.webDriver;
+    WebDriver webDriver = BrowserUtil.webDriver.get();
     webDriver.get(url);
     String html = webDriver.getPageSource();
+    System.out.println(url);
 
     if (html == null || html.isEmpty()) {
       return;
@@ -309,6 +310,7 @@ public class BaseCrawler {
       try {
         Thread.sleep(10000);
       } catch (InterruptedException e) {
+        e.printStackTrace();
       }
       crawlHtml(htmlCrawler, nextUrls.get(0), processed);
     }

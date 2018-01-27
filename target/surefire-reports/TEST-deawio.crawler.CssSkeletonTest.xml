@@ -61,12 +61,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="cssSelectorDocumentHasManyElements" time="0.055"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="parseElementWithValidHtml" time="0.001"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="cssSelectorDocumentHasManyElements" time="0.039"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="parseElementWithValidHtml" time="0.014"/>
   <testcase classname="deawio.crawler.CssSkeletonTest" name="isDomWithNonDomElements" time="0.001"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithHtmlTagWithNoCssSelector" time="0.001"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithHtmlTagWithNoCssSelector" time="0"/>
   <testcase classname="deawio.crawler.CssSkeletonTest" name="parseDocumentWithValidHtml" time="0.001"/>
   <testcase classname="deawio.crawler.CssSkeletonTest" name="cssSelectorDocumentHasOnlyOneElement" time="0"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithElementHasCssSelector" time="0"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameElementHasCombinedCssSelector" time="0"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithElementHasCssSelector" time="0.001"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameElementHasCombinedCssSelector" time="0.003"/>
 </testsuite>

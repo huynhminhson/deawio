@@ -1,5 +1,3 @@
 package deawio.web;
 
-public class Web {
-
-}
+public class Web {}

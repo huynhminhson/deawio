@@ -20,6 +20,7 @@ public class SimpleExtracter {
         Validate.notNull(text);
         texts.add(text);
       } catch (Exception e) {
+        e.printStackTrace();
       }
     }
     return texts;
@@ -27,7 +28,7 @@ public class SimpleExtracter {
 
   public List<String> texts(Element htmlDocument, String css) {
     Elements elements = htmlDocument.select(css);
-    if (elements == null) {
+    if (elements == null || elements.isEmpty()) {
       return new ArrayList<>();
     } else {
       return texts(elements, css);
@@ -88,8 +89,10 @@ public class SimpleExtracter {
           Validate.notNull(joined);
           urls.add(joined);
         } catch (Exception e) {
+          e.printStackTrace();
         }
       } catch (MalformedURLException e) {
+        e.printStackTrace();
       }
     }
     return urls;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="deawio.crawler.BaseCrawlerTest" time="0.006" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="deawio.crawler.BaseCrawlerTest" time="0.007" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/amd64"/>
@@ -61,14 +61,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="testCalcLowPrice" time="0.003"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="shouldHaveOneNewRecordWhenInsertNewProductRecord" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="shouldUpdateExistingRecordWhenInsertExistingDeal" time="0.003"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="testExtractDiscount" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="shouldHaveOneNewRecordWhenInsertNewDealValues" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="testCalcDiscount" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="shouldHaveOneNewRecordWhenInsertNewStoreRecord" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="testCalcHighPrice" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="testExtractPrice" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="shouldUpdateRecordWhenInsertExistingProductRecord" time="0"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcHighPriceWithValidDiscountAndLowPrice" time="0.003"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractDiscountWithInvalidDiscountString" time="0"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcHighPriceWithInvalidDiscountAndLowPrice" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcDiscountWithInvalidLowPriceAndHighPrice" time="0"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractDiscountWithValidDiscountString" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractPriceWithValidPriceString" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcLowPriceWithValidDiscountAndHighPrice" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractPriceWithInvalidPriceString" time="0"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcDiscountWithValidLowPriceAndHighPrice" time="0"/>
 </testsuite>

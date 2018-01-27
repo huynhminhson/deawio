@@ -1,24 +1,21 @@
 package deawio.crawler;
 
+import deawio.base.BrowserUtil;
 import deawio.base.MyBatisUtil;
 import deawio.mapper.DealModelMapper;
 import deawio.mapper.MainMapper;
 import deawio.mapper.ProductModelMapper;
 import deawio.mapper.StoreModelMapper;
 import deawio.model.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.lang3.Validate;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -220,21 +217,9 @@ public class BaseCrawler {
     }
 
     // FETCH REMOTE HTML
-    String html = null;
-
-    // FETCH FIRST PAGE
-    HttpClient httpClient = HttpClientBuilder.create().build();
-    HttpGet listingPage = new HttpGet(url);
-    listingPage.setHeader(
-        "User-Agent",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36");
-
-    try {
-      html = EntityUtils.toString(httpClient.execute(listingPage).getEntity());
-      System.out.println(">>> FETCHING " + url);
-    } catch (IOException e) {
-      return;
-    }
+    WebDriver webDriver = BrowserUtil.webDriver;
+    webDriver.get(url);
+    String html = webDriver.getPageSource();
 
     if (html == null || html.isEmpty()) {
       return;

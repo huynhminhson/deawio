@@ -19,35 +19,35 @@ public class CssSkeletonTest extends TestCase {
   @Autowired private CssSkeleton cssSkeleton;
 
   @Test
-  public void isDomShouldBeFalse() {
-    cssSkeleton.isDOM(Jsoup.parse("<style></style>").select("style").first());
-    cssSkeleton.isDOM(Jsoup.parse("<script></script>").select("script").first());
-    cssSkeleton.isDOM(Jsoup.parse("<body></body>").select("body").first());
+  public void isDomWithNonDomElements() {
+    assertFalse(cssSkeleton.isDOM(Jsoup.parse("<style></style>").select("style").first()));
+    assertFalse(cssSkeleton.isDOM(Jsoup.parse("<script></script>").select("script").first()));
+    assertFalse(cssSkeleton.isDOM(Jsoup.parse("<body></body>").select("body").first()));
   }
 
   @Test
-  public void nodeNameShouldBeTagWhenThereIsNoClasses() {
+  public void nodeNameWithHtmlTagWithNoCssSelector() {
     String html = "<div></div>";
     Element element = Jsoup.parse(html).select("div").first();
     assertEquals(cssSkeleton.nodeName(element), "div");
   }
 
   @Test
-  public void nodeNameShouldBeCssSelectorWhenElementHasOneClass() {
+  public void nodeNameWithElementHasCssSelector() {
     String html = "<div class=\"a\"></div>";
     Element element = Jsoup.parse(html).select("div").first();
     assertEquals(cssSkeleton.nodeName(element), ".a");
   }
 
   @Test
-  public void nodeNameShouldBeCssSelectorWhenElementHasManyClasses() {
+  public void nodeNameElementHasCombinedCssSelector() {
     String html = "<div class=\"a b c d e\"></div>";
     Element element = Jsoup.parse(html).select("div").first();
     assertEquals(cssSkeleton.nodeName(element), ".a.b.c.d.e");
   }
 
   @Test
-  public void cssSelectorWhenDocumentHasOnlyOneNode() {
+  public void cssSelectorDocumentHasOnlyOneElement() {
     String html = "<div class=\"a b c d e\"></div>";
     Element element = Jsoup.parse(html).select("div").first();
     List<String> cssSelector = new ArrayList<>();
@@ -56,7 +56,7 @@ public class CssSkeletonTest extends TestCase {
   }
 
   @Test
-  public void cssSelectorWhenDocumentHasManyNodes() {
+  public void cssSelectorDocumentHasManyElements() {
     String html =
         "<div class=\"a\"><div class=\"b\"><div class=\"c\"><div class=\"d\"></div></div></div></div>";
     Element element = Jsoup.parse(html).select(".d").first();
@@ -66,7 +66,7 @@ public class CssSkeletonTest extends TestCase {
   }
 
   @Test
-  public void parseElementShouldReturnList() {
+  public void parseElementWithValidHtml() {
     String html = "<div class=\"a\"><div class=\"b\"></div><div class=\"c\"></div></div>";
     Element element = Jsoup.parse(html).select(".a").first();
     List<String> cssLines = new ArrayList<>();
@@ -75,7 +75,7 @@ public class CssSkeletonTest extends TestCase {
   }
 
   @Test
-  public void parseDocumentShouldReturnListOfCssSelectors() {
+  public void parseDocumentWithValidHtml() {
     String html = "<div class=\"a\"><div class=\"b\"></div><div class=\"c\"></div></div>";
     assertEquals(
         cssSkeleton.parseDocument(html), Arrays.asList(".a {}", ".a > .b {}", ".a > .c {}"));

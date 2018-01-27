@@ -19,7 +19,7 @@ public class SimpleExtracterTest extends TestCase {
   private static String baseUrl = "http://store.steampowered.com/search/?tags=-1&category1=998";
 
   @Test
-  public void testTexts() throws IOException {
+  public void textsWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -29,7 +29,7 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
-  public void testTextsInvalidCss() throws IOException {
+  public void textsWithInvalidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -39,7 +39,7 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
-  public void testAttrs() throws IOException {
+  public void attrsWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -49,7 +49,7 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
-  public void testAttrsInvalidCss() throws IOException {
+  public void attrsWithInvalidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -59,7 +59,7 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
-  public void testUrls() throws IOException {
+  public void urlsWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -69,7 +69,7 @@ public class SimpleExtracterTest extends TestCase {
   }
 
   @Test
-  public void testUrlsInvalidCss() throws IOException {
+  public void urlsWithInvalidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));

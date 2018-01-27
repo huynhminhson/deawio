@@ -21,21 +21,7 @@ public class StoreSteampoweredComTest extends TestCase {
   private static String baseUrl = "http://store.steampowered.com/search/?tags=-1&category1=998";
 
   @Test
-  public void isValidHtmlShouldBeTrue() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
-    assertTrue(storeSteampoweredCom.isValidHtml(html));
-  }
-
-  @Test
-  public void isValidHtmlShouldBeFalse() throws IOException {
-    String html = "<div></div>";
-    assertFalse(storeSteampoweredCom.isValidHtml(html));
-  }
-
-  @Test
-  public void testPaginationUrls() throws IOException {
+  public void paginationUrlsWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -46,14 +32,14 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testPaginationUrlsSiteChanged() throws IOException {
+  public void paginationUrlsWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     List<String> paginationUrls = storeSteampoweredCom.paginationUrls(html, baseUrl);
     assertTrue(paginationUrls.isEmpty());
   }
 
   @Test
-  public void testContainers() throws IOException {
+  public void containersWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -62,14 +48,14 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testContainersSiteChanged() throws IOException {
+  public void containersWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     Elements containers = storeSteampoweredCom.containers(html);
     assertTrue(containers.isEmpty());
   }
 
   @Test
-  public void testProductName() throws IOException {
+  public void productNameWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -79,7 +65,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testProductNameSiteChanged() throws IOException {
+  public void productNameWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String productName = storeSteampoweredCom.productName(container);
@@ -87,7 +73,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testProductImageUrl() throws IOException {
+  public void productImageUrlWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -99,7 +85,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testProductImageUrlSiteChanged() throws IOException {
+  public void productImageUrlWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String productImageUrl = storeSteampoweredCom.productImageUrl(container, baseUrl);
@@ -107,7 +93,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testDealUrl() throws IOException {
+  public void dealUrlWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -119,7 +105,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testDealUrlSiteChanged() throws IOException {
+  public void dealUrlWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String dealUrl = storeSteampoweredCom.dealUrl(container, baseUrl);
@@ -127,7 +113,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testDealHighPrice() throws IOException {
+  public void dealHighPriceWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -145,7 +131,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testDealHighPriceSiteChanged() throws IOException {
+  public void dealHighPriceWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
@@ -153,7 +139,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testDealLowPrice() throws IOException {
+  public void dealLowPriceWithValidHtml() throws IOException {
     String html =
         IOUtils.toString(
             this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
@@ -171,7 +157,7 @@ public class StoreSteampoweredComTest extends TestCase {
   }
 
   @Test
-  public void testDealLowPriceSiteChanged() throws IOException {
+  public void dealLowPriceWithInvalidHtml() throws IOException {
     String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
     Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealLowPrice = storeSteampoweredCom.dealLowPrice(container);

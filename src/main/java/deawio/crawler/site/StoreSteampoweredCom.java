@@ -4,12 +4,9 @@ import deawio.crawler.BaseCrawler;
 import deawio.crawler.CssSkeleton;
 import deawio.crawler.HtmlCrawler;
 import deawio.crawler.SimpleExtracter;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -23,36 +20,6 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
   @Autowired private BaseCrawler baseCrawler;
   @Autowired private SimpleExtracter simpleExtracter;
   @Autowired private CssSkeleton cssSkeleton;
-
-  @Override
-  public boolean isValidHtml(String html) {
-    try {
-      html = Jsoup.parse(html).select("div#search_result_container").first().html();
-    } catch (NullPointerException e) {
-      return false;
-    }
-    Set<String> htmlCssSkeleton = new HashSet<>();
-    for (String string : cssSkeleton.parseDocument(html)) {
-      htmlCssSkeleton.add(string);
-    }
-    String sample = null;
-    try {
-      sample =
-          IOUtils.toString(
-              this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
-    } catch (IOException e) {
-    }
-    sample = Jsoup.parse(sample).select("div#search_result_container").first().html();
-    Set<String> sampleCssSkeleton = new HashSet<>();
-    for (String string : cssSkeleton.parseDocument(sample)) {
-      sampleCssSkeleton.add(string);
-    }
-    if (htmlCssSkeleton.equals(sampleCssSkeleton)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   @Override
   public String storeName() {

@@ -4,6 +4,10 @@ This project is under active development and contains two main parts:
 * A web application interface for users to track their favorite video games.
 
 
+## Status
+![Travis CI](https://api.travis-ci.org/huynhminhson/deawio.svg?branch=master)
+
+
 ## Covered Platforms
 * [Steam](http://store.steampowered.com/) 
 * [GamersGate](https://uk.gamersgate.com/) 
@@ -15,10 +19,6 @@ This project is under active development and contains two main parts:
 * [Humble Bundle](https://www.humblebundle.com/store) 
 * [Sila Games](https://store.silagames.com/) 
 * [WinGameStore](https://www.wingamestore.com/) 
-
-
-## Status
-![Travis CI](https://api.travis-ci.org/huynhminhson/deawio.svg?branch=master)
 
 
 ## Getting Started

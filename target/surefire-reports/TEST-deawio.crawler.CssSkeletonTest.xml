@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="deawio.crawler.CssSkeletonTest" time="0.08" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="deawio.crawler.CssSkeletonTest" time="0.054" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/amd64"/>
@@ -61,12 +61,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="cssSelectorDocumentHasManyElements" time="0.073"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="parseElementWithValidHtml" time="0.001"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="isDomWithNonDomElements" time="0.002"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithHtmlTagWithNoCssSelector" time="0.001"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="parseDocumentWithValidHtml" time="0.001"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="cssSelectorDocumentHasManyElements" time="0.05"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="parseElementWithValidHtml" time="0"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="isDomWithNonDomElements" time="0.001"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithHtmlTagWithNoCssSelector" time="0"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="parseDocumentWithValidHtml" time="0.002"/>
   <testcase classname="deawio.crawler.CssSkeletonTest" name="cssSelectorDocumentHasOnlyOneElement" time="0.001"/>
   <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameWithElementHasCssSelector" time="0"/>
-  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameElementHasCombinedCssSelector" time="0.001"/>
+  <testcase classname="deawio.crawler.CssSkeletonTest" name="nodeNameElementHasCombinedCssSelector" time="0"/>
 </testsuite>

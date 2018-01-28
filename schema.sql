@@ -22,8 +22,7 @@ CREATE TABLE product (
   code       VARCHAR(200)  NOT NULL,
   image_url  VARCHAR(1000) NOT NULL,
   UNIQUE (name),
-  UNIQUE (code),
-  UNIQUE (image_url)
+  UNIQUE (code)
 );
 CREATE TRIGGER auto_modified
   BEFORE UPDATE

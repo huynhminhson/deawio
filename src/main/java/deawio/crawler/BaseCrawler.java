@@ -15,6 +15,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
@@ -218,8 +219,9 @@ public class BaseCrawler {
 
     // FETCH REMOTE HTML
     WebDriver webDriver = BrowserUtil.webDriver.get();
+    JavascriptExecutor js = (JavascriptExecutor) webDriver;
     webDriver.get(url);
-    String html = webDriver.getPageSource();
+    String html = (String) js.executeScript("return document.body.innerHTML");
     System.out.println(url);
 
     if (html == null || html.isEmpty()) {

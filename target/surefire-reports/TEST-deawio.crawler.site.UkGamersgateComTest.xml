@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="14" failures="0" name="deawio.crawler.site.UkGamersgateComTest" time="0.084" errors="0" skipped="0">
+<testsuite tests="14" failures="0" name="deawio.crawler.site.UkGamersgateComTest" time="0.085" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/amd64"/>
@@ -61,18 +61,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productImageUrlWithValidHtml" time="0.021"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productNameWithValidHtml" time="0.004"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealLowPriceWithValidHtml" time="0.02"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="containersWithInvalidHtml" time="0.004"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="paginationUrlsWithInvalidHtml" time="0.004"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealUrlWithInvalidHtml" time="0.001"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealHighPriceWithInvalidHtml" time="0.001"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealLowPriceWithInvalidHtml" time="0.001"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productImageUrlWithInvalidHtml" time="0.001"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="containersWithValidHtml" time="0.003"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="paginationUrlsWithValidHtml" time="0.005"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productNameWithInvalidHtml" time="0.001"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealHighPriceWithValidHtml" time="0.014"/>
-  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealUrlWithValidHtml" time="0.004"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productImageUrlWithValidHtml" time="0.008"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productNameWithValidHtml" time="0.002"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealLowPriceWithValidHtml" time="0.015"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="containersWithInvalidHtml" time="0.005"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="paginationUrlsWithInvalidHtml" time="0.007"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealUrlWithInvalidHtml" time="0"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealHighPriceWithInvalidHtml" time="0.002"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealLowPriceWithInvalidHtml" time="0.002"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productImageUrlWithInvalidHtml" time="0.002"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="containersWithValidHtml" time="0.005"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="paginationUrlsWithValidHtml" time="0.006"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="productNameWithInvalidHtml" time="0.002"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealHighPriceWithValidHtml" time="0.022"/>
+  <testcase classname="deawio.crawler.site.UkGamersgateComTest" name="dealUrlWithValidHtml" time="0.007"/>
 </testsuite>

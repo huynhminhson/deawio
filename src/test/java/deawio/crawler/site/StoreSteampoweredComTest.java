@@ -19,12 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class StoreSteampoweredComTest extends TestCase {
   @Autowired private StoreSteampoweredCom storeSteampoweredCom;
   private static String baseUrl = "http://store.steampowered.com/search/?tags=-1&category1=998";
+  private static String sampleHtml = "/samples/store.steampowered.com.html";
 
   @Test
   public void paginationUrlsWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     List<String> paginationUrls = storeSteampoweredCom.paginationUrls(html, baseUrl);
     assertTrue(
         paginationUrls.contains(
@@ -40,9 +39,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void containersWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     Elements containers = storeSteampoweredCom.containers(html);
     assertFalse(containers.isEmpty());
   }
@@ -56,9 +53,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void productNameWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     Element container = storeSteampoweredCom.containers(html).get(0);
     String productName = storeSteampoweredCom.productName(container);
     assertEquals(productName, "Counter-Strike: Global Offensive");
@@ -74,9 +69,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void productImageUrlWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     Element container = storeSteampoweredCom.containers(html).get(0);
     String productImageUrl = storeSteampoweredCom.productImageUrl(container, baseUrl);
     assertEquals(
@@ -94,9 +87,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void dealUrlWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     Element container = storeSteampoweredCom.containers(html).get(0);
     String dealUrl = storeSteampoweredCom.dealUrl(container, baseUrl);
     assertEquals(
@@ -114,9 +105,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void dealHighPriceWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     Element container = storeSteampoweredCom.containers(html).get(0);
     Double dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
     assertEquals(dealHighPrice, 11.99);
@@ -140,9 +129,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void dealLowPriceWithValidHtml() throws IOException {
-    String html =
-        IOUtils.toString(
-            this.getClass().getResourceAsStream("/samples/store.steampowered.com.html"));
+    String html = IOUtils.toString(this.getClass().getResourceAsStream(sampleHtml));
     Element container = storeSteampoweredCom.containers(html).get(0);
     Double dealLowPrice = storeSteampoweredCom.dealLowPrice(container);
     assertEquals(dealLowPrice, 11.99);

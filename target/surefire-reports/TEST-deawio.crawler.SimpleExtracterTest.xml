@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="deawio.crawler.SimpleExtracterTest" time="0.138" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="deawio.crawler.SimpleExtracterTest" time="0.144" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/amd64"/>
@@ -61,10 +61,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="deawio.crawler.SimpleExtracterTest" name="textsWithInvalidHtml" time="0.022"/>
-  <testcase classname="deawio.crawler.SimpleExtracterTest" name="urlsWithValidHtml" time="0.022"/>
-  <testcase classname="deawio.crawler.SimpleExtracterTest" name="attrsWithInvalidHtml" time="0.02"/>
-  <testcase classname="deawio.crawler.SimpleExtracterTest" name="attrsWithValidHtml" time="0.021"/>
-  <testcase classname="deawio.crawler.SimpleExtracterTest" name="textsWithValidHtml" time="0.025"/>
-  <testcase classname="deawio.crawler.SimpleExtracterTest" name="urlsWithInvalidHtml" time="0.028"/>
+  <testcase classname="deawio.crawler.SimpleExtracterTest" name="textsWithInvalidHtml" time="0.023"/>
+  <testcase classname="deawio.crawler.SimpleExtracterTest" name="urlsWithValidHtml" time="0.036"/>
+  <testcase classname="deawio.crawler.SimpleExtracterTest" name="attrsWithInvalidHtml" time="0.029"/>
+  <testcase classname="deawio.crawler.SimpleExtracterTest" name="attrsWithValidHtml" time="0.019"/>
+  <testcase classname="deawio.crawler.SimpleExtracterTest" name="textsWithValidHtml" time="0.02"/>
+  <testcase classname="deawio.crawler.SimpleExtracterTest" name="urlsWithInvalidHtml" time="0.017"/>
 </testsuite>

@@ -32,7 +32,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void paginationUrlsWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     List<String> paginationUrls = storeSteampoweredCom.paginationUrls(html, baseUrl);
     assertTrue(paginationUrls.isEmpty());
   }
@@ -46,7 +46,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void containersWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Elements containers = storeSteampoweredCom.containers(html);
     assertTrue(containers.isEmpty());
   }
@@ -61,7 +61,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void productNameWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String productName = storeSteampoweredCom.productName(container);
     assertNull(productName);
@@ -79,7 +79,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void productImageUrlWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String productImageUrl = storeSteampoweredCom.productImageUrl(container, baseUrl);
     assertNull(productImageUrl);
@@ -97,7 +97,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void dealUrlWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String dealUrl = storeSteampoweredCom.dealUrl(container, baseUrl);
     assertNull(dealUrl);
@@ -121,7 +121,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void dealHighPriceWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealHighPrice = storeSteampoweredCom.dealHighPrice(container);
     assertNull(dealHighPrice);
@@ -145,7 +145,7 @@ public class StoreSteampoweredComTest extends TestCase {
 
   @Test
   public void dealLowPriceWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealLowPrice = storeSteampoweredCom.dealLowPrice(container);
     assertNull(dealLowPrice);

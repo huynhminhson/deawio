@@ -140,10 +140,11 @@ public class StoreSteampoweredCom implements HtmlCrawler, Runnable {
 
   @Override
   public void run() {
-    StoreSteampoweredCom storeSteampoweredCom =
-        context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class);
-    for (String url : storeSteampoweredCom.startUrls()) {
-      baseCrawler.crawlHtml(storeSteampoweredCom, url, new HashSet<>());
+    for (String url : startUrls()) {
+      baseCrawler.crawlHtml(
+          context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class),
+          url,
+          new HashSet<>());
     }
   }
 }

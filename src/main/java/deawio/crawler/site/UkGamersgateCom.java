@@ -121,9 +121,9 @@ public class UkGamersgateCom implements HtmlCrawler, Runnable {
 
   @Override
   public void run() {
-    UkGamersgateCom ukGamersgateCom = context.getBean("ukGamersgateCom", UkGamersgateCom.class);
-    for (String url : ukGamersgateCom.startUrls()) {
-      baseCrawler.crawlHtml(ukGamersgateCom, url, new HashSet<>());
+    for (String url : startUrls()) {
+      baseCrawler.crawlHtml(
+          context.getBean("ukGamersgateCom", UkGamersgateCom.class), url, new HashSet<>());
     }
   }
 }

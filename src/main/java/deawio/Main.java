@@ -13,16 +13,10 @@ public class Main {
   public static void main(String[] args) throws InterruptedException {
     ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-    StoreSteampoweredCom storeSteampoweredCom =
-        context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class);
-    UkGamersgateCom ukGamersgateCom = context.getBean("ukGamersgateCom", UkGamersgateCom.class);
-    UkGamesplanetCom ukGamesplanetCom = context.getBean("ukGamesplanetCom", UkGamesplanetCom.class);
-    DeGamesplanetCom deGamesplanetCom = context.getBean("deGamesplanetCom", DeGamesplanetCom.class);
-
     TaskExecutor taskExecutor = context.getBean("taskExecutor", TaskExecutor.class);
-    taskExecutor.execute(storeSteampoweredCom);
-    taskExecutor.execute(ukGamersgateCom);
-    taskExecutor.execute(ukGamesplanetCom);
-    taskExecutor.execute(deGamesplanetCom);
+    taskExecutor.execute(context.getBean("storeSteampoweredCom", StoreSteampoweredCom.class));
+    taskExecutor.execute(context.getBean("ukGamersgateCom", UkGamersgateCom.class));
+    taskExecutor.execute(context.getBean("ukGamesplanetCom", UkGamesplanetCom.class));
+    taskExecutor.execute(context.getBean("deGamesplanetCom", DeGamesplanetCom.class));
   }
 }

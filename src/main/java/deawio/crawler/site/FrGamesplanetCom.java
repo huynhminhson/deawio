@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeGamesplanetCom extends UkGamesplanetCom implements HtmlCrawler, Runnable {
+public class FrGamesplanetCom extends UkGamesplanetCom implements HtmlCrawler, Runnable {
   @Autowired private ApplicationContext context;
   @Autowired private BaseCrawler baseCrawler;
   @Autowired private SimpleExtracter simpleExtracter;
@@ -20,7 +20,7 @@ public class DeGamesplanetCom extends UkGamesplanetCom implements HtmlCrawler, R
 
   @Override
   public String storeName() {
-    return "Gamesplanet DE";
+    return "Gamesplanet FR";
   }
 
   @Override
@@ -30,14 +30,14 @@ public class DeGamesplanetCom extends UkGamesplanetCom implements HtmlCrawler, R
 
   @Override
   public List<String> startUrls() {
-    return Arrays.asList("https://de.gamesplanet.com/games/offers");
+    return Arrays.asList("https://fr.gamesplanet.com/games/offers");
   }
 
   @Override
   public void run() {
     for (String url : startUrls()) {
       baseCrawler.crawlHtml(
-          context.getBean("deGamesplanetCom", DeGamesplanetCom.class), url, new HashSet<>());
+          context.getBean("frGamesplanetCom", FrGamesplanetCom.class), url, new HashSet<>());
     }
   }
 }

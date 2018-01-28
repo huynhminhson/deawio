@@ -31,7 +31,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void paginationUrlsWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     List<String> paginationUrls = ukGamersgateCom.paginationUrls(html, baseUrl);
     assertTrue(paginationUrls.isEmpty());
   }
@@ -45,7 +45,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void containersWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Elements containers = ukGamersgateCom.containers(html);
     assertTrue(containers.isEmpty());
   }
@@ -60,7 +60,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void productNameWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String productName = ukGamersgateCom.productName(container);
     assertNull(productName);
@@ -78,7 +78,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void productImageUrlWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String productImageUrl = ukGamersgateCom.productImageUrl(container, baseUrl);
     assertNull(productImageUrl);
@@ -96,7 +96,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void dealUrlWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     String dealUrl = ukGamersgateCom.dealUrl(container, baseUrl);
     assertNull(dealUrl);
@@ -124,7 +124,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void dealHighPriceWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealHighPrice = ukGamersgateCom.dealHighPrice(container);
     assertNull(dealHighPrice);
@@ -152,7 +152,7 @@ public class UkGamersgateComTest extends TestCase {
 
   @Test
   public void dealLowPriceWithInvalidHtml() throws IOException {
-    String html = IOUtils.toString(this.getClass().getResourceAsStream("/samples/github.com.html"));
+    String html = "<div></div>";
     Element container = Jsoup.parse("<div></div>").select("div").first();
     Double dealLowPrice = ukGamersgateCom.dealLowPrice(container);
     assertNull(dealLowPrice);

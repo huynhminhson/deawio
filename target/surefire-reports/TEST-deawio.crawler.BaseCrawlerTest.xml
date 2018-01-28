@@ -64,10 +64,10 @@
   <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcHighPriceWithValidDiscountAndLowPrice" time="0.003"/>
   <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractDiscountWithInvalidDiscountString" time="0"/>
   <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcHighPriceWithInvalidDiscountAndLowPrice" time="0.001"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcDiscountWithInvalidLowPriceAndHighPrice" time="0.001"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractDiscountWithValidDiscountString" time="0.001"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractPriceWithValidPriceString" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcLowPriceWithValidDiscountAndHighPrice" time="0"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractPriceWithInvalidPriceString" time="0.001"/>
-  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcDiscountWithValidLowPriceAndHighPrice" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcDiscountWithInvalidLowPriceAndHighPrice" time="0"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractDiscountWithValidDiscountString" time="0.002"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractPriceWithValidPriceString" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcLowPriceWithValidDiscountAndHighPrice" time="0.001"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="extractPriceWithInvalidPriceString" time="0"/>
+  <testcase classname="deawio.crawler.BaseCrawlerTest" name="calcDiscountWithValidLowPriceAndHighPrice" time="0"/>
 </testsuite>

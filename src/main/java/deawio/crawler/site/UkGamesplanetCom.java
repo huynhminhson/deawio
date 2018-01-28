@@ -103,9 +103,9 @@ public class UkGamesplanetCom implements HtmlCrawler, Runnable {
 
   @Override
   public void run() {
-    UkGamesplanetCom ukGamesplanetCom = context.getBean("ukGamesplanetCom", UkGamesplanetCom.class);
-    for (String url : ukGamesplanetCom.startUrls()) {
-      baseCrawler.crawlHtml(ukGamesplanetCom, url, new HashSet<>());
+    for (String url : startUrls()) {
+      baseCrawler.crawlHtml(
+          context.getBean("ukGamesplanetCom", UkGamesplanetCom.class), url, new HashSet<>());
     }
   }
 }
